@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление топлива</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<h3>Добавление топлива</h3>
+<form th:method="POST" th:action="@{/fuel/add}" th:object="${fuel}">
+    <label for="brand">Введите название бренда</label>
+    <input type="text" id="brand" th:field="*{brand}" required placeholder="Бренд">
+    <div style="color:red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
+    <br>
+    <label for="octane">Введите октановое число</label>
+    <input type="number" min="80" max="100" id="octane" th:field="*{octane}" required placeholder="Октановое число">
+    <div style="color:red" th:if="${#fields.hasErrors('octane')}" th:errors="*{octane}">Octane Error</div>
+    <br>
+    <input type="submit" value="Создать"/>
+</form>
+</body>
+</html>

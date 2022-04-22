@@ -1,0 +1,32 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<br>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/order/add}">Добавить заказ</a>
+</div>
+
+<h3>Список заказов</h3>
+<table style="border-color: black" border="1px">
+    <tr>
+        <th>Дата</th>
+        <th>Водитель</th>
+        <th>Автомобиль</th>
+        <th>Цена</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.getDate()}">date</td>
+        <td th:text="${order.getDriver().getName()}">driver</td>
+        <td th:text="${order.getDriver().getCar().getBrand()}">car</td>
+        <td th:text="${order.getPrice()}">price</td>
+    </tr>
+</table>
+</body>
+</html>

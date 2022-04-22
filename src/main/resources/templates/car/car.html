@@ -1,0 +1,33 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Автомобили</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<br>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+  <a th:href="@{/car/add}">Добавить автомобиль</a>
+</div>
+
+<h3>Список автомобилей</h3>
+<table style="border-color: black" border="1px">
+  <tr>
+    <th>Бренд</th>
+    <th>Топливо</th>
+  </tr>
+  <tr th:each="car : ${cars}">
+    <td th:text="${car.getBrand()}">brand</td>
+    <td th:text="${car.getFuel().getBrand() + ' ' + car.getFuel().getOctane()}"> octane </td>
+    <td sec:authorize="hasRole('ROLE_ADMIN')">
+      <form th:method="POST" th:action="@{/car/delete/{id}(id=${car.getId()})}">
+        <input type="submit" value="Удалить">
+      </form>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

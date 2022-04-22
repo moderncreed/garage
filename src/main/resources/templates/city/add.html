@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление города</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<h3>Добавление города</h3>
+<form th:method="POST" th:action="@{/city/add}" th:object="${city}">
+    <label for="name">Введите город</label>
+    <input type="text" id="name" th:field="*{name}" required placeholder="Москва">
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br>
+    <input type="submit" value="Создать"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление автомобиля</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<h3>Добавление автомобиля</h3>
+<form th:method="POST" th:action="@{/car/add}" th:object="${car}">
+    <label for="brand">Введите название бренда</label>
+    <input type="text" id="brand" th:field="*{brand}" required placeholder="Бренд">
+    <br>
+
+    <label for="fuel">Введите топливо</label>
+    <select name="fuel" id="fuel">
+        <option th:each="fuel : ${fuels}"
+                th:value="${fuel.getId()}"
+                th:text="${fuel.getBrand() + ' ' + fuel.getOctane()}">
+        </option>
+    </select>
+    <br>
+    <input type="submit" value="Создать"/>
+</form>
+</body>
+</html>

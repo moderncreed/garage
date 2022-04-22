@@ -1,0 +1,30 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Города</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<br>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/city/add}">Добавить город</a>
+</div>
+<h3>Список городов</h3>
+<table style="border-color: black" border="1px">
+    <tr>
+        <th>Город</th>
+    </tr>
+    <tr th:each="city : ${cities}">
+        <td th:text="${city.getName()}">city</td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <form th:method="POST" th:action="@{/city/delete/{id}(id=${city.getId()})}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
