@@ -20,7 +20,7 @@
     <th>Топливо</th>
   </tr>
   <tr th:each="car : ${cars}">
-    <td th:text="${car.getBrand()}">brand</td>
+    <td><a th:text="${car.getBrand()}" th:href="@{car/show/{id}(id=${car.getId()})}">car</a> </td>
     <td th:text="${car.getFuel().getBrand() + ' ' + car.getFuel().getOctane()}"> octane </td>
     <td sec:authorize="hasRole('ROLE_ADMIN')">
       <form th:method="POST" th:action="@{/car/delete/{id}(id=${car.getId()})}">

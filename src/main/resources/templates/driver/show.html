@@ -1,0 +1,19 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Водитель</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<a th:href="@{/}">Главная </a>
+<a th:href="@{/logout}">Выйти</a>
+<br>
+
+
+<h3>Водитель <span th:text="${driver.getName()}">driver</span></h3>
+<br>
+<p>Автомобиль <span th:text="${driver.getCar().getBrand()}"></span> </p>
+<h5>Количество поездок <span th:text="${count}"></span> </h5>
+</body>
+</html>

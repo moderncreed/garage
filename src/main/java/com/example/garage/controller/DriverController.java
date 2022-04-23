@@ -2,7 +2,6 @@ package com.example.garage.controller;
 
 import com.example.garage.data.CarData;
 import com.example.garage.data.DriverData;
-import com.example.garage.model.Car;
 import com.example.garage.model.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +56,12 @@ public class DriverController {
         driverData.delete(id);
         logger.info("Админ " + authentication.getName() + " удалил водителя " + driver.getName());
         return "redirect:/driver";
+    }
+
+    @GetMapping("/show/{id}")
+    public String show(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("driver", driverData.show(id));
+        model.addAttribute("count", driverData.count(id));
+        return "driver/show";
     }
 }

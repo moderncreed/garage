@@ -34,4 +34,12 @@ public class DriverData {
     public Driver show(Long id) {
         return jdbcTemplate.queryForObject("{call showDriver(?)}", new Object[]{id}, new DriverMapper());
     }
+    public List<Driver> showDriversByCar(Long id) {
+        return jdbcTemplate.query("{call showDriversByCar(?)}", new DriverMapper(), id);
+    }
+
+    public Integer count(Long id) {
+        return jdbcTemplate.queryForObject("{call c(?)}", Integer.class, id);
+    }
+
 }

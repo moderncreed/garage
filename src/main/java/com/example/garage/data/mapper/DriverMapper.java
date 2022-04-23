@@ -14,8 +14,8 @@ public class DriverMapper implements RowMapper<Driver> {
         Driver driver = new Driver();
         Car car = new Car();
         Fuel fuel = new Fuel();
-        car.setId(rs.getLong("c.id"));
-        car.setBrand(rs.getString("c.brand"));
+        car.setId(rs.getLong("c2.id"));
+        car.setBrand(rs.getString("c2.brand"));
         fuel.setId(rs.getLong("f.id"));
         fuel.setBrand(rs.getString("f.brand"));
         fuel.setOctane(rs.getInt("f.octane"));

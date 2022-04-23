@@ -1,9 +1,9 @@
 package com.example.garage.controller;
 
 import com.example.garage.data.CarData;
+import com.example.garage.data.DriverData;
 import com.example.garage.data.FuelData;
 import com.example.garage.model.Car;
-import com.example.garage.model.City;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.Map;
-
 @Controller
 @RequestMapping("/car")
 public class CarController {
@@ -25,6 +22,8 @@ public class CarController {
     CarData carData;
     @Autowired
     FuelData fuelData;
+    @Autowired
+    DriverData driverData;
 
     private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 
@@ -62,5 +61,12 @@ public class CarController {
         carData.delete(id);
         logger.info("Админ " + authentication.getName() + " удалил машину " + car.getBrand());
         return "redirect:/car";
+    }
+
+    @GetMapping("/show/{id}")
+    public String showDrivers(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("drivers", driverData.showDriversByCar(id));
+        model.addAttribute("car", carData.show(id));
+        return "car/show";
     }
 }

@@ -22,7 +22,7 @@
         <th>Автомобиль</th>
     </tr>
     <tr th:each="driver : ${drivers}">
-        <td th:text="${driver.getName()}">name</td>
+        <td><a th:text="${driver.getName()}" th:href="@{driver/show/{id}(id=${driver.getId()})}">driver</a> </td>
         <td th:text="${driver.getAge()}">age</td>
         <td th:text="${driver.getExp()}">exp</td>
         <td th:text="${driver.getCar().getBrand()}">car</td>
